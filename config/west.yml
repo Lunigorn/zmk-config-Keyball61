@@ -1,9 +1,9 @@
 manifest:
   remotes:
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+      url-base: https://github.com/Lunigorn
     - name: kumamuk-git
-      url-base: https://github.com/kumamuk-git
+      url-base: https://github.com/Lunigorn
   projects:
     - name: zmk
       remote: zmkfirmware
