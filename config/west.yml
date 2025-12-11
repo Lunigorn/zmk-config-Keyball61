@@ -1,14 +1,16 @@
 manifest:
   remotes:
-    - name: lunigorn
-      url-base: https://github.com/lunigorn
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+    - name: kumamuk-git
+      url-base: https://github.com/kumamuk-gita
   projects:
     - name: zmk
-      remote: lunigorn
+      remote: zmkfirmware
       revision: main
       import: app/west.yml
     - name: zmk-pmw3610-driver
-      remote: lunigorn
+      remote: kumamuk-git
       revision: main
   self:
     path: config
