@@ -1,7 +1,7 @@
 manifest:
   remotes:
     - name: lunigorn
-      url-base: https://github.com/Lunigorn
+      url-base: https://github.com/lunigorn
   projects:
     - name: zmk
       remote: lunigorn
