@@ -107,19 +107,19 @@
         combos {
             compatible = "zmk,combos";
 
-            /* RIGHT_ALT + DELETE -> toggle (or momentarily switch) to MOUSE layer */
+            /* RIGHT_ALT + DELETE -> toggle to MOUSE layer */
             combo_rightalt_delete: combo_0 {
                 timeout-ms = <60>;
                 key-positions = <59 60>;
                 layers = <0>;
-                bindings = <&mo 3>;
+                bindings = <&tog 4>;
             };
 
             /* On MOUSE layer pressing the same keys returns to default layer */
             combo_rightalt_delete_mouse: combo_1 {
                 timeout-ms = <60>;
                 key-positions = <59 60>;
-                layers = <3>;
+                layers = <4>;
                 bindings = <&tog 0>;
             };
         };
