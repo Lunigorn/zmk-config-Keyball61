@@ -7,7 +7,7 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: 779c9876d1b252fea59159e02e355f1a4ab551be
+      revision: c06fa48ce59e016105d79c20942d085314502d8d
       import: app/west.yml
     - name: zmk-pmw3610-driver
       remote: kumamuk-git
