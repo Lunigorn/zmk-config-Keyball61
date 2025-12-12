@@ -120,7 +120,7 @@
                 timeout-ms = <60>;
                 key-positions = <59 60>;
                 layers = <4>;
-                bindings = <&tog 0>;
+                bindings = <&tog 4>;
             };
         };
     };
