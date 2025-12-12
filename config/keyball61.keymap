@@ -104,6 +104,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                          &trans  &trans
             >;
         };
+        /* combos are not yet handled by keymap-drawer parser; hide them when drawing */
+#ifndef KEYMAP_DRAWER
         combos {
             compatible = "zmk,combos";
 
@@ -123,5 +125,6 @@
                 bindings = <&tog 4>;
             };
         };
+#endif
     };
 };
