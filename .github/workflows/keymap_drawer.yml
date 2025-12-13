@@ -9,7 +9,6 @@ on:
 
 jobs:
   draw:
-    if: "github.actor != 'github-actions[bot]'"
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -19,6 +18,23 @@ jobs:
         with:
           persist-credentials: true
           fetch-depth: 0
+
+      - name: Skip run if triggered by bot and only drawings changed
+        shell: bash
+        run: |
+          if [ "${{ github.actor }}" = "github-actions[bot]" ]; then
+            echo "Run triggered by actions bot; checking head commit files..."
+            # Ensure the commit is available
+            git fetch --no-tags --prune --depth=1 origin ${{ github.sha }} || true
+            files=$(git show --name-only --pretty="" ${{ github.sha }} || true)
+            echo "Changed files:\n$files"
+            # Check for any file not under keymap-drawer/
+            non_drawings=$(echo "$files" | tr '\n' '\n' | grep -v '^keymap-drawer/' || true)
+            if [ -z "$non_drawings" ]; then
+              echo "Only drawings were changed by bot; exiting to avoid retrigger loop."
+              exit 0
+            fi
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v4
