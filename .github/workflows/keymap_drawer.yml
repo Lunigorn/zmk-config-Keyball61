@@ -46,16 +46,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install keymap-drawer
 
+      - name: Debug show keymap version and location
+        run: |
+          python -c "import shutil, pkgutil, sys; print('python', sys.version)"
+          which keymap || true
+          keymap --version || true
+
       - name: Prepare draw-only keymaps (remove combos)
         run: |
           python scripts/prepare_draw_keymaps.py --in-dir config --out-dir .draw_temp
 
-      - name: Draw keymaps
+      - name: Debug list draw temp
         run: |
+          echo ".draw_temp contents:"; ls -la .draw_temp || true
+
+      - name: Draw keymaps (verbose)
+        run: |
+          set -x
           mkdir -p keymap-drawer
           for f in .draw_temp/*.keymap; do
-            keymap draw -c keymap_drawer.config.yaml "$f" -o keymap-drawer || exit $?
+            echo "Drawing $f"
+            keymap draw -v -c keymap_drawer.config.yaml "$f" -o keymap-drawer || { echo "keymap draw failed for $f"; exit 1; }
           done
+          set +x
 
       - name: Upload drawings
         uses: actions/upload-artifact@v4
@@ -64,7 +77,7 @@ jobs:
           path: keymap-drawer
 
       - name: Commit and push drawings
-        if: always()
+        if: ${{ always() }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
