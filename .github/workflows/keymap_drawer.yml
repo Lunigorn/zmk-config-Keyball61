@@ -9,17 +9,36 @@ on:
 
 jobs:
   draw:
-    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    with:
-      commit_message: "[Draw] ${{ github.event.head_commit.message }}"
-      amend_commit: false
-      install_branch: "main"
-      keymap_patterns: "config/*.keymap"
-      json_path: "config"
-      config_path: "keymap_drawer.config.yaml" # config file, ignored if not exists
-      output_folder: "keymap-drawer"
-      destination: "both"
-      parse_args: "keyball61:'-DKEYMAP_DRAWER'"  # map of extra args to pass to `keymap parse`
-      draw_args: ""   # map of extra args to pass to `keymap draw`, e.g. "corne:'-k corne_rotated' cradio:'-k paroxysm'"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install keymap-drawer
+        run: |
+          python -m pip install --upgrade pip
+          pip install keymap-drawer
+
+      - name: Prepare draw-only keymaps (remove combos)
+        run: |
+          python scripts/prepare_draw_keymaps.py --in-dir config --out-dir .draw_temp
+
+      - name: Draw keymaps
+        run: |
+          mkdir -p keymap-drawer
+          for f in .draw_temp/*.keymap; do
+            keymap draw -c keymap_drawer.config.yaml "$f" -o keymap-drawer || exit $?
+          done
+
+      - name: Upload drawings
+        uses: actions/upload-artifact@v4
+        with:
+          name: keymap-drawer
+          path: keymap-drawer
