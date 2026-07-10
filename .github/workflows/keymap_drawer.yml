@@ -69,13 +69,13 @@ jobs:
             yaml="keymap-drawer/${keyboard}.yaml"
             svg="keymap-drawer/${keyboard}.svg"
             echo "Parsing $f"
-            keymap parse -v -c keymap_drawer.config.yaml -z "$f" -o "$yaml" || { echo "keymap parse failed for $f"; exit 1; }
+            keymap -d -c keymap_drawer.config.yaml parse -z "$f" -o "$yaml" || { echo "keymap parse failed for $f"; exit 1; }
             echo "Drawing $yaml"
             draw_args=()
             if [ -f "config/${keyboard}.json" ]; then
               draw_args=(-j "config/${keyboard}.json")
             fi
-            keymap draw -v -c keymap_drawer.config.yaml "$yaml" "${draw_args[@]}" -o "$svg" || { echo "keymap draw failed for $f"; exit 1; }
+            keymap -d -c keymap_drawer.config.yaml draw "$yaml" "${draw_args[@]}" -o "$svg" || { echo "keymap draw failed for $f"; exit 1; }
           done
           set +x
 
