@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - ".github/workflows/keymap_draser.yml"
+      - ".github/workflows/keymap_drawer.yml"
       - "keymap_drawer.config.yaml"
       - "config/**"
 
@@ -65,8 +65,17 @@ jobs:
           set -x
           mkdir -p keymap-drawer
           for f in .draw_temp/*.keymap; do
-            echo "Drawing $f"
-            keymap draw -v -c keymap_drawer.config.yaml "$f" -o keymap-drawer || { echo "keymap draw failed for $f"; exit 1; }
+            keyboard=$(basename -s .keymap "$f")
+            yaml="keymap-drawer/${keyboard}.yaml"
+            svg="keymap-drawer/${keyboard}.svg"
+            echo "Parsing $f"
+            keymap parse -v -c keymap_drawer.config.yaml -z "$f" -o "$yaml" || { echo "keymap parse failed for $f"; exit 1; }
+            echo "Drawing $yaml"
+            draw_args=()
+            if [ -f "config/${keyboard}.json" ]; then
+              draw_args=(-j "config/${keyboard}.json")
+            fi
+            keymap draw -v -c keymap_drawer.config.yaml "$yaml" "${draw_args[@]}" -o "$svg" || { echo "keymap draw failed for $f"; exit 1; }
           done
           set +x
 
