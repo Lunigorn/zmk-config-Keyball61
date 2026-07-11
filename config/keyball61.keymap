@@ -77,23 +77,23 @@
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans  &trans    &trans    &trans     &trans                  &trans         &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &trans    &kp UP    &trans     &trans                  &trans         &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans                  &kp PAGE_UP    &mkp LCLK  &mkp RCLK  &mkp MCLK  &mo SNIPE  &trans
-&trans  &trans  &trans    &trans    &mo SNIPE  &trans  &trans  &trans  &kp PAGE_DOWN  &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &trans    &trans    &trans     &trans  &trans  &trans  &mo SCROLL                                           &trans  &trans
+&trans  &trans  &trans    &trans    &trans     &trans                  &trans         &trans     &trans         &trans      &trans     &trans
+&trans  &trans  &trans    &kp UP    &trans     &trans                  &trans         &trans     &msc SCRL_UP   &trans      &trans     &trans
+&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans                  &kp PAGE_UP    &mkp LCLK  &mkp RCLK      &mkp MCLK   &mo SNIPE  &trans
+&trans  &trans  &trans    &trans    &mo SNIPE  &trans  &trans  &trans  &kp PAGE_DOWN  &trans     &msc SCRL_DOWN &trans      &trans     &trans
+&trans  &trans  &trans    &trans    &trans     &trans  &trans  &trans  &mo SCROLL                                           &trans     &trans
             >;
         };
 
         game_layer {
             label = "GAME";
-            /* left: WASD home row, plain keys (no hold-taps) for reliable gaming */
+            /* pinky col: ESC/T/G/B; alpha shifted right for WASD stagger */
             bindings = <
-&kp ESC    &kp N1   &kp N2   &kp N3   &kp N4   &kp N5                               &trans         &trans     &trans     &trans     &trans  &trans
-&kp GRAVE  &kp Q    &kp E    &kp R    &kp T    &kp G                                &trans         &trans     &trans     &kp UP     &trans  &trans
-&kp TAB    &kp W    &kp A    &kp S    &kp D    &kp F                                &kp PAGE_UP    &mkp LCLK  &mkp RCLK  &mkp MCLK  &mo SNIPE  &trans
-&kp LSHIFT &kp Z    &kp X    &kp C    &kp V    &kp B   &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp PAGE_DOWN  &trans     &trans     &trans     &trans  &trans
-&kp LCTRL  &trans   &kp LSHIFT  &kp SPACE  &kp LEFT_ALT  &tog GAME  &mo SCROLL  &trans          &trans          &kp RIGHT_ALT  &kp DELETE
+&kp ESC         &kp N1       &kp N2       &kp N3       &kp N4     &kp N5                                        &trans         &trans         &trans         &trans         &trans         &trans
+&kp T           &kp GRAVE    &kp Q        &kp W        &kp E      &kp R                                         &trans         &trans         &msc SCRL_UP   &trans         &trans         &trans
+&kp G           &kp TAB      &kp A        &kp S        &kp D      &kp F                                         &kp PAGE_UP    &mkp LCLK      &mkp RCLK      &mkp MCLK      &mo SNIPE      &trans
+&kp B           &kp LSHIFT   &kp Z        &kp X        &kp C      &kp V        &kp LEFT_BRACKET  &kp PAGE_DOWN  &trans         &msc SCRL_DOWN &trans         &trans         &trans         &trans
+&trans          &kp LCTRL    &none        &kp LEFT_WIN &kp LEFT_ALT &kp SPACE  &tog GAME         &mo SCROLL     &trans                                       &kp RIGHT_ALT  &kp DELETE
             >;
         };
 
