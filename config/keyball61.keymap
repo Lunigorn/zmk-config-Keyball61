@@ -89,11 +89,11 @@
             label = "GAME";
             /* pinky col: ESC/T/G/B; alpha shifted right for WASD stagger */
             bindings = <
-&kp ESC         &kp N1       &kp N2       &kp N3       &kp N4     &kp N5                                        &trans         &trans         &trans         &trans         &trans         &trans
-&kp T           &kp GRAVE    &kp Q        &kp W        &kp E      &kp R                                         &trans         &trans         &msc SCRL_UP   &trans         &trans         &trans
-&kp G           &kp TAB      &kp A        &kp S        &kp D      &kp F                                         &kp PAGE_UP    &mkp LCLK      &mkp RCLK      &mkp MCLK      &mo SNIPE      &trans
-&kp B           &kp LSHIFT   &kp Z        &kp X        &kp C      &kp V        &kp LEFT_BRACKET  &kp PAGE_DOWN  &trans         &msc SCRL_DOWN &trans         &trans         &trans         &trans
-&trans          &kp LCTRL    &none        &kp LEFT_WIN &kp LEFT_ALT &kp SPACE  &tog GAME         &mo SCROLL     &trans                                       &kp RIGHT_ALT  &kp DELETE
+&kp ESC         &kp N1       &kp N2       &kp N3       &kp N4       &kp N5                                        &trans         &trans         &trans         &trans         &trans         &trans
+&kp T           &kp GRAVE    &kp Q        &kp W        &kp E        &kp R                                         &trans         &trans         &msc SCRL_UP   &trans         &trans         &trans
+&kp G           &kp TAB      &kp A        &kp S        &kp D        &kp F                                         &kp PAGE_UP    &mkp LCLK      &mkp RCLK      &mkp MCLK      &mo SNIPE      &trans
+&kp B           &kp LSHIFT   &kp Z        &kp X        &kp C        &kp V        &kp LEFT_BRACKET  &kp PAGE_DOWN  &trans         &trans         &msc SCRL_DOWN &trans         &trans         &trans
+&trans          &kp LCTRL    &none        &kp LEFT_WIN &kp LEFT_ALT &kp SPACE    &tog GAME         &mo SCROLL     &trans                                       &kp RIGHT_ALT  &kp DELETE
             >;
         };
 
