@@ -1,9 +1,11 @@
 #define DEFAULT 0
-#define SYM     1
-#define FUN     2
-#define MOUSE   3
-#define SCROLL  4
-#define SNIPE   5
+#define NUM     1
+#define SYM     2
+#define FUN     3
+#define MOUSE   4
+#define GAME    5
+#define SCROLL  6
+#define SNIPE   7
 
 #include <behaviors/mouse_keys.dtsi>
 #include <behaviors.dtsi>
@@ -34,7 +36,7 @@
 &kp GRAVE       &kp Q        &kp W             &kp E         &kp R      &kp T                                        &kp Y            &kp U   &kp I       &kp O              &kp P           &kp BACKSLASH
 &kp TAB         &mt LCTRL A  &mt LEFT_SHIFT S  &mt LALT D    &kp F      &kp G                                        &kp H            &kp J   &mt RALT K  &mt RIGHT_SHIFT L  &mt RCTRL SEMI  &kp SQT
 &kp LEFT_SHIFT  &kp Z        &kp X             &kp C         &kp V      &kp B   &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp N            &kp M   &kp COMMA   &kp DOT            &kp FSLH        &kp RIGHT_SHIFT
-&kp LCTRL       &none        &kp LEFT_WIN      &kp LEFT_ALT  &kp SPACE  &mo 4   &mo 5             &kp ENTER          &lt 2 BACKSPACE                                         &kp RIGHT_ALT   &kp DELETE
+&kp LCTRL       &none        &kp LEFT_WIN      &kp LEFT_ALT  &kp SPACE  &mo MOUSE  &mo SCROLL        &kp ENTER          &lt SYM BACKSPACE                                         &kp RIGHT_ALT   &kp DELETE
             >;
         };
 
@@ -77,9 +79,21 @@
             bindings = <
 &trans  &trans  &trans    &trans    &trans     &trans                  &trans         &trans     &trans     &trans     &trans  &trans
 &trans  &trans  &trans    &kp UP    &trans     &trans                  &trans         &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans                  &kp PAGE_UP    &mkp LCLK  &mkp MCLK  &mkp RCLK  &mo 5   &trans
-&trans  &trans  &trans    &trans    &mo 6      &trans  &trans  &trans  &kp PAGE_DOWN  &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &trans    &trans    &trans     &trans  &trans  &trans  &mo 3                                           &trans  &trans
+&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans                  &kp PAGE_UP    &mkp LCLK  &mkp RCLK  &mkp MCLK  &mo SNIPE  &trans
+&trans  &trans  &trans    &trans    &mo SNIPE  &trans  &trans  &trans  &kp PAGE_DOWN  &trans     &trans     &trans     &trans  &trans
+&trans  &trans  &trans    &trans    &trans     &trans  &trans  &trans  &mo SCROLL                                           &trans  &trans
+            >;
+        };
+
+        game_layer {
+            label = "GAME";
+            bindings = <
+/* left: WASD home row, plain keys (no hold-taps) for reliable gaming */
+&kp ESC    &kp N1   &kp N2   &kp N3   &kp N4   &kp N5                               &trans         &trans     &trans     &trans     &trans  &trans
+&kp GRAVE  &kp Q    &kp E    &kp R    &kp T    &kp G                                &trans         &trans     &trans     &kp UP     &trans  &trans
+&kp TAB    &kp W    &kp A    &kp S    &kp D    &kp F                                &kp PAGE_UP    &mkp LCLK  &mkp RCLK  &mkp MCLK  &mo SNIPE  &trans
+&kp LSHIFT &kp Z    &kp X    &kp C    &kp V    &kp B   &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp PAGE_DOWN  &trans     &trans     &trans     &trans  &trans
+&kp LCTRL  &trans   &kp LSHIFT  &kp SPACE  &kp LEFT_ALT  &tog GAME  &mo SCROLL  &trans          &trans          &kp RIGHT_ALT  &kp DELETE
             >;
         };
 
@@ -109,20 +123,20 @@
         combos {
             compatible = "zmk,combos";
 
-            /* RIGHT_ALT + DELETE -> toggle to MOUSE layer */
+            /* RIGHT_ALT + DELETE -> toggle GAME layer */
             combo_rightalt_delete: combo_0 {
                 timeout-ms = <60>;
                 key-positions = <59 60>;
                 layers = <0>;
-                bindings = <&tog 4>;
+                bindings = <&tog GAME>;
             };
 
-            /* On MOUSE layer pressing the same keys returns to default layer */
-            combo_rightalt_delete_mouse: combo_1 {
+            /* On GAME layer pressing the same keys returns to default layer */
+            combo_rightalt_delete_game: combo_1 {
                 timeout-ms = <60>;
                 key-positions = <59 60>;
-                layers = <4>;
-                bindings = <&tog 4>;
+                layers = <GAME>;
+                bindings = <&tog GAME>;
             };
         };
 #endif
