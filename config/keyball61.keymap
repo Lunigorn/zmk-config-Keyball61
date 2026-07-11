@@ -87,8 +87,8 @@
 
         game_layer {
             label = "GAME";
+            /* left: WASD home row, plain keys (no hold-taps) for reliable gaming */
             bindings = <
-/* left: WASD home row, plain keys (no hold-taps) for reliable gaming */
 &kp ESC    &kp N1   &kp N2   &kp N3   &kp N4   &kp N5                               &trans         &trans     &trans     &trans     &trans  &trans
 &kp GRAVE  &kp Q    &kp E    &kp R    &kp T    &kp G                                &trans         &trans     &trans     &kp UP     &trans  &trans
 &kp TAB    &kp W    &kp A    &kp S    &kp D    &kp F                                &kp PAGE_UP    &mkp LCLK  &mkp RCLK  &mkp MCLK  &mo SNIPE  &trans

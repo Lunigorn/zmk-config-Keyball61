@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Prepare draw-only keymap files by removing combos and preprocessor directives.
+Prepare draw-only keymap files by removing combos while keeping layer #defines.
 Usage: python scripts/prepare_draw_keymaps.py --in-dir config --out-dir .draw_temp
 """
 import argparse
@@ -9,15 +9,15 @@ from pathlib import Path
 
 
 def strip_draw_incompatible(text: str) -> str:
-    # keymap-drawer does not understand C preprocessor directives or combos.
-    text = re.sub(r"^#define\b.*$(?:\n)?", "", text, flags=re.MULTILINE)
+    # keymap-drawer uses a C preprocessor: keep #define layer names, but remove
+    # combos and #ifndef blocks that the parser cannot handle.
     text = re.sub(
-        r"/\*.*?\*/\s*\n\s*#ifndef\b.*?#endif\b\s*",
+        r"/\*\s*combos are not yet handled.*?\*/\s*\n\s*#ifndef\b.*?#endif\b\s*",
         "\n",
         text,
         flags=re.DOTALL,
     )
-    text = re.sub(r"^#ifndef\b.*?#endif\b\s*", "", text, flags=re.DOTALL | re.MULTILINE)
+    text = re.sub(r"^\s*#ifndef\b.*?#endif\b\s*", "", text, flags=re.DOTALL | re.MULTILINE)
     text = re.sub(
         r"(^|\n)\s*combos\s*\{.*?\}\s*;\s*(?=\n|$)",
         "\n",
