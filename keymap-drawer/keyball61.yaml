@@ -356,8 +356,8 @@ layers:
   - {t: '[', s: '{'}
   - PgDn
   - {t: '$$mdi:transfer$$', type: trans}
-  - $$mdi:pan-down$$
   - {t: '$$mdi:transfer$$', type: trans}
+  - $$mdi:pan-down$$
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
